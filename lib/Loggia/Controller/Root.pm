@@ -16,7 +16,7 @@ Loggia::Controller::Root - Root Controller for Loggia
 
 =head1 DESCRIPTION
 
-[enter your description here]
+Displays albums.
 
 =head1 METHODS
 

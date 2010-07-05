@@ -52,7 +52,7 @@ Loggia - Catalyst based application
 
 =head1 DESCRIPTION
 
-[enter your description here]
+The minimalist gallery!
 
 =head1 SEE ALSO
 
