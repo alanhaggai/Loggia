@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"> 
+    <head> 
+        <title>Loggia</title> 
+        <link type='text/css' rel='stylesheet' href='/css/style.css' /> 
+    </head> 
+    <body> 
+        <div id='container'> 
+            <div id='header'>
+            </div>
+
+            <div id='showcase'>
+                [% content %]
+            </div>
+
+            <div id='footer'>
+            </div>
+        </div>
+    </body>
+</html>
