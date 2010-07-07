@@ -29,7 +29,6 @@ The root page (/)
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    # Hello World
     $c->stash('template' => 'index.tt');
 }
 

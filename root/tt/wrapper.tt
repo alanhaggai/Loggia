@@ -3,11 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US"> 
     <head> 
         <title>Loggia</title> 
-        <link type='text/css' rel='stylesheet' href='/css/style.css' /> 
+        <link type='text/css'
+              rel='stylesheet'
+              href='[% c.uri_for("/static/css/style.css") %]' />
     </head> 
     <body> 
         <div id='container'> 
             <div id='header'>
+                <h1>Loggia</h1>
             </div>
 
             <div id='showcase'>
@@ -15,6 +18,15 @@
             </div>
 
             <div id='footer'>
+                <p>
+                    Copyright &copy; 2010,
+                    <a href='http://thoughtripples.com/'>Thought Ripples</a>
+                </p>
+
+                <div class='powered-by'>
+                    <img src='[% c.uri_for("/static/images/powered_by_loggia.jpg") %]'
+                         alt= 'Powered by Loggia' />
+                </div>
             </div>
         </div>
     </body>
