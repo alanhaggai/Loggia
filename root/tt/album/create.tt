@@ -1,0 +1,19 @@
+<form method='post' action='[% c.uri_for("create.do") %]'>
+    <div> 
+        <label> 
+            Name of album:
+            <input type='text' name='name' /> 
+        </label> 
+    </div> 
+ 
+    <div> 
+        <label> 
+            Description for album:
+            <input type='text' name='description' /> 
+        </label> 
+    </div> 
+ 
+    <div> 
+        <input type='submit' name='submit' value='Create Album' /> 
+    </div> 
+</form>
