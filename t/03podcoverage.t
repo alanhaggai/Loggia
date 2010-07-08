@@ -7,4 +7,23 @@ eval "use Test::Pod::Coverage 1.04";
 plan skip_all => 'Test::Pod::Coverage 1.04 required' if $@;
 plan skip_all => 'set TEST_POD to enable this test' unless $ENV{TEST_POD};
 
-all_pod_coverage_ok();
+my @skip_modules = qw{
+    Loggia::Schema
+    Loggia::Schema::Result::Album
+};
+
+for my $module (all_modules('.')) {
+    my $skip_flag = 0;
+
+    for my $skip_module (@skip_modules) {
+        if ($module eq $skip_module) {
+            $skip_flag = 1;
+        }
+    }
+
+    if (!$skip_flag) {
+        pod_coverage_ok($module);
+    }
+}
+
+done_testing();
