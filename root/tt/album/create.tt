@@ -4,18 +4,18 @@
     <div> 
         <label> 
             Name of album:
-            <input type='text' name='name' /> 
+            <input name='name' type='text' />
         </label> 
     </div> 
  
     <div> 
         <label> 
             Description for album:
-            <input type='text' name='description' /> 
+            <input name='description' type='text' />
         </label> 
     </div> 
  
     <div> 
-        <input type='submit' name='submit' value='Create Album' /> 
+        <input name='submit' type='submit' value='Create Album' />
     </div> 
 </form>
