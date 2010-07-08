@@ -1,3 +1,5 @@
+[% META title = 'Create Album' %]
+
 <form method='post' action='[% c.uri_for("create.do") %]'>
     <div> 
         <label> 
