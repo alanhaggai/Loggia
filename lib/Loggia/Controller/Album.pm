@@ -1,6 +1,7 @@
 package Loggia::Controller::Album;
 use Moose;
 use namespace::autoclean;
+use Try::Tiny;
 
 BEGIN {extends 'Catalyst::Controller'; }
 
@@ -38,9 +39,16 @@ sub create_do :Path('create.do') {
     my $name        = $c->req->body_params->{'name'};
     my $description = $c->req->body_params->{'description'};
 
-    # TODO:
-    #   Check if an album with the same name exists or not.
-    #   If not, create an album with the name and description.
+    try {
+        my $album = $c->model('DB::Album')->create({
+            'name'        => $name,
+            'description' => $description,
+        });
+    }
+    catch {
+        $c->res->status(500);
+        $c->stash('error' => 'Album creation failed');
+    };
 
     $c->stash('template' => 'album/create-do.tt');
 }

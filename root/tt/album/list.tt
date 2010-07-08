@@ -1,0 +1,10 @@
+[% META title = 'List Albums' %]
+
+[% IF albums;
+    FOR album IN albums %]
+        <div class='album'>
+            <div class='album-name'>[% album.name %]</div>
+            <div class='album-description'>[% album.description %]</div>
+        </div>
+    [% END;
+END %]
