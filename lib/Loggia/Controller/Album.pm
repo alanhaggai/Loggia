@@ -53,6 +53,27 @@ sub create_do :Path('create.do') {
     $c->stash('template' => 'album/create-do.tt');
 }
 
+=head2 list
+
+List existing albums.
+
+=cut
+
+sub list :Local {
+    my ($self, $c) = @_;
+
+    try {
+        my @albums = $c->model('DB::Album')->search();
+        $c->stash('albums' => \@albums);
+    }
+    catch {
+        $c->res->status(500);
+        $c->stash('error' => 'Album listing failed');
+    };
+
+    $c->stash('template' => 'album/list.tt');
+}
+
 =head1 AUTHOR
 
 Alan Haggai Alavi

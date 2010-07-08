@@ -7,6 +7,7 @@ BEGIN { use_ok 'Loggia::Controller::Album' }
 BEGIN { use_ok 'Test::WWW::Mechanize::Catalyst' => 'Loggia' }
 
 ok(request('/album/create')->is_success, 'Request should succeed');
+ok(request('/album/list')->is_success,   'Request should succeed');
 
 my $ua = Test::WWW::Mechanize::Catalyst->new();
 
@@ -38,5 +39,9 @@ $ua->submit_form(
     }
 );
 is($ua->status(), 500, 'Album creation failed');
+
+$ua->get_ok('http://localhost/album/list');
+$ua->content_contains('Paris');
+$ua->content_contains('Paris by night');
 
 done_testing();
