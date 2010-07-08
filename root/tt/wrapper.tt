@@ -20,6 +20,12 @@
                     </div>
                 [% END %]
 
+                [% IF status || c.req.param('status') %]
+                    <div class='status'>
+                        [% status || c.req.param('status') %]
+                    </div>
+                [% END %]
+
                 [% content %]
             </div>
 
