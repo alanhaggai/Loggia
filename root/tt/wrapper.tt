@@ -14,9 +14,9 @@
             </div>
 
             <div id='showcase'>
-                [% IF error %]
+                [% IF error || c.req.param('error') %]
                     <div class='error'>
-                        [% error %]
+                        [% error || c.req.param('error') %]
                     </div>
                 [% END %]
 
