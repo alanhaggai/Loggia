@@ -74,6 +74,36 @@ sub list :Local {
     $c->stash('template' => 'album/list.tt');
 }
 
+=head2 delete
+
+Delete album.
+
+=cut
+
+sub delete :Local {
+    my ($self, $c) = @_;
+
+    my $id = $c->req->body_params->{'id'};
+    my %query_parametres;
+    try {
+        my $album = $c->model('DB::Album')->search({'id' => $id});
+        if ($album != 0) {
+            $album->delete();
+            $query_parametres{'status'} = 'Album deleted successfully';
+        }
+        else {
+            $query_parametres{'status'} = 'Album does not exist';
+        }
+    }
+    catch {
+        $query_parametres{'error'} = 'Album deletion failed';
+    };
+
+    $c->res->redirect(
+        $c->uri_for('list', \%query_parametres)
+    );
+}
+
 =head1 AUTHOR
 
 Alan Haggai Alavi

@@ -43,5 +43,8 @@ is($ua->status(), 500, 'Album creation failed');
 $ua->get_ok('http://localhost/album/list');
 $ua->content_contains('Paris');
 $ua->content_contains('Paris by night');
+$ua->submit_form('form_number' => 1);
+$ua->get_ok('http://localhost/album/list');
+$ua->content_lacks('Paris', 'Album with the name Paris not found');
 
 done_testing();
