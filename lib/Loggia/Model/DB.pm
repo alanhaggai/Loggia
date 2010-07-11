@@ -7,9 +7,9 @@ __PACKAGE__->config(
     schema_class => 'Loggia::Schema',
     
     connect_info => {
-        dsn => 'dbi:mysql:loggia',
-        user => 'root',
-        password => '',
+        dsn => 'dbi:mysql:dbname=loggia',
+        user => 'loggia',
+        password => '10gg14',
     }
 );
 
