@@ -23,6 +23,7 @@ $ua->content_contains(q{name='submit'});
 my $name        = 'Paris';
 my $description = 'Paris by night';
 
+# create an album
 $ua->submit_form(
     'fields' => {
         'name'        => $name,
@@ -31,6 +32,7 @@ $ua->submit_form(
 );
 is($ua->status(), 200, 'Album created successfully');
 
+# duplicate albums should not be created
 $ua->get_ok('http://localhost/album/create');
 $ua->submit_form(
     'fields' => {
@@ -40,10 +42,15 @@ $ua->submit_form(
 );
 is($ua->status(), 500, 'Album creation failed');
 
+# check if album exists
 $ua->get_ok('http://localhost/album/list');
 $ua->content_contains('Paris');
 $ua->content_contains('Paris by night');
+
+# delete album
 $ua->submit_form('form_number' => 1);
+
+# album should not exist as it has already been deleted
 $ua->get_ok('http://localhost/album/list');
 $ua->content_lacks('Paris', 'Album with the name Paris not found');
 
