@@ -33,6 +33,10 @@ __PACKAGE__->set_primary_key("id");
 # Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-07-11 23:28:05
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IvYx6WUQeaKnyNvgc7V8Dw
 
+__PACKAGE__->belongs_to(
+    'album' => 'Loggia::Schema::Result::Album',
+    {'foreign.id' => 'self.album'},
+);
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;

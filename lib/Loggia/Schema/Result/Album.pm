@@ -32,6 +32,10 @@ __PACKAGE__->add_unique_constraint("name", ["name"]);
 # Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-07-08 07:22:12
 # DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cFbTpdYsbqR8X1lbUSJaWA
 
+__PACKAGE__->has_many(
+    'images' => 'Loggia::Schema::Result::Image',
+    {'foreign.album' => 'self.id'},
+);
 
 # You can replace this text with custom content, and it will be preserved on regeneration
 1;
