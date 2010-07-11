@@ -63,7 +63,7 @@ sub list :Local {
     my ($self, $c) = @_;
 
     try {
-        my @albums = $c->model('DB::Album')->search();
+        my @albums = $c->model('DB::Album')->all();
         $c->stash('albums' => \@albums);
     }
     catch {
