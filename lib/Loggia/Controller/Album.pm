@@ -44,9 +44,11 @@ sub create_do :Path('create.do') {
             'name'        => $name,
             'description' => $description,
         });
+        if ($album) {
+            $c->stash('status' => 'Album created successfully');
+        }
     }
     catch {
-        $c->res->status(500);
         $c->stash('error' => 'Album creation failed');
     };
 
@@ -71,7 +73,6 @@ sub list :Local {
         }
     }
     catch {
-        $c->res->status(500);
         $c->stash('error' => 'Album listing failed');
     };
 

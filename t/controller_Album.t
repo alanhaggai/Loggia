@@ -30,7 +30,7 @@ $ua->submit_form(
         'description' => $description,
     }
 );
-is($ua->status(), 200, 'Album created successfully');
+$ua->content_contains(q{Album created successfully});
 
 # duplicate albums should not be created
 $ua->get_ok('http://localhost/album/create');
@@ -40,7 +40,7 @@ $ua->submit_form(
         'description' => $description,
     }
 );
-is($ua->status(), 500, 'Album creation failed');
+$ua->content_contains(q{Album creation failed});
 
 # check if album exists
 $ua->get_ok('http://localhost/album/list');
