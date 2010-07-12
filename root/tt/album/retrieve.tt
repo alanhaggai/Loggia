@@ -1,0 +1,14 @@
+[% META title = 'Retrieve Album' %]
+
+[% IF images;
+    FOR image IN images %]
+        <form method='post' action='[% c.uri_for("delete") %]'>
+            <div class='image'>
+                <div class='image-description'>[% image.description %]</div>
+            </div>
+
+            <input name='id' type='hidden' value='[% album.id %]' />
+            <input name='submit' type='submit' value='Delete Album' />
+        </form>
+    [% END;
+END %]

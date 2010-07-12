@@ -109,6 +109,32 @@ sub delete :Local {
     );
 }
 
+=head2 retrieve
+
+Retrieve album and associated images.
+
+=cut
+
+sub retrieve :Local :Args(1) {
+    my ($self, $c, $id) = @_;
+
+    try {
+        my $album  = $c->model('DB::Album')->find($id);
+        if ($album) {
+            my @images = $album->images();
+            $c->stash('images' => \@images);
+        }
+        else {
+            $c->stash('status' => 'Album does not exist');
+        }
+    }
+    catch {
+        $c->stash('error' => 'Retrieval of album failed');
+    };
+
+    $c->stash('template' => 'album/retrieve.tt');
+}
+
 =head1 AUTHOR
 
 Alan Haggai Alavi
