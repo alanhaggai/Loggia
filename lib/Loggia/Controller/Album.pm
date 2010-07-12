@@ -65,6 +65,10 @@ sub list :Local {
     try {
         my @albums = $c->model('DB::Album')->all();
         $c->stash('albums' => \@albums);
+
+        if (!@albums) {
+            $c->stash('status' => 'No albums present');
+        }
     }
     catch {
         $c->res->status(500);

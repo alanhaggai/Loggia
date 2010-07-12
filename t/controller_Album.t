@@ -52,6 +52,6 @@ $ua->submit_form('form_number' => 1);
 
 # album should not exist as it has already been deleted
 $ua->get_ok('http://localhost/album/list');
-$ua->content_lacks('Paris', 'Album with the name Paris not found');
+$ua->content_contains('No albums present');
 
 done_testing();
