@@ -24,14 +24,21 @@ __PACKAGE__->add_columns(
     is_nullable => 0,
     size => 32,
   },
+  "type",
+  {
+    data_type => "VARCHAR",
+    default_value => undef,
+    is_nullable => 0,
+    size => 15,
+  },
   "album",
   { data_type => "INT", default_value => undef, is_nullable => 1, size => 11 },
 );
 __PACKAGE__->set_primary_key("id");
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-07-11 23:28:05
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:IvYx6WUQeaKnyNvgc7V8Dw
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-07-12 09:37:23
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:mpppOmViUA3HD4sud5bAXg
 
 __PACKAGE__->belongs_to(
     'album' => 'Loggia::Schema::Result::Album',
