@@ -8,7 +8,8 @@
             </div>
 
             <input name='id' type='hidden' value='[% album.id %]' />
-            <input name='submit' type='submit' value='Delete Album' />
         </form>
     [% END;
 END %]
+
+<input name='submit' type='submit' value='Delete Album' />
