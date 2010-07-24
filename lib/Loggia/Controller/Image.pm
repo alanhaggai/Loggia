@@ -6,7 +6,6 @@ BEGIN {extends 'Catalyst::Controller'; }
 
 use Digest::SHA1 'sha1_hex';
 use File::Spec::Functions 'catfile';
-use File::Type::WebImages 'mime_type';
 
 =head1 NAME
 
@@ -40,7 +39,6 @@ sub upload :Local {
         my $binary_data        = do { local $/; <$fh> };
         my $hash               = sha1_hex($binary_data);
         my $file_name_in_store = catfile('root/static/images/gallery/', $hash);
-        my $mime_type          = mime_type($binary_data);
 
         if ($file->copy_to($file_name_in_store)) {
             $query_parametres{'status'} = 'Image uploaded successfully';
@@ -49,7 +47,6 @@ sub upload :Local {
             $image->create({
                 'description' => $description,
                 'hash'        => $hash,
-                'type'        => $mime_type,
                 'album'       => $album,
             });
         }
@@ -61,12 +58,21 @@ sub upload :Local {
             $query_parametres{'error'} = 'No image was selected for upload';
     }
 
-    $c->res->redirect(
-        $c->uri_for("/album/retrieve/$album", \%query_parametres)
-    );
+    if ($album) {
+        $c->res->redirect(
+            $c->uri_for("/album/retrieve/$album", \%query_parametres)
+        );
+    }
+    else {
+        $c->res->redirect(
+            $c->uri_for('/album/list', \%query_parametres)
+        );
+    }
 }
 
 =head2 retrieve
+
+Retrieve image from gallery.
 
 =cut
 
@@ -76,7 +82,6 @@ sub retrieve :Local :Args(1) {
     my $image  = $c->model('DB::Image')->find($id);
     if ($image) {
         my $file_name = catfile('/static/images/gallery', $image->hash());
-        my $mime_type = mime_type($file_name);
 
         $c->stash(
             'image'    => $image,

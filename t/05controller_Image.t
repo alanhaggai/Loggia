@@ -11,7 +11,7 @@ my $response = request('/image/upload');
 ok($response->is_redirect(), 'Redirect');
 is(
     $response->header('location'),
-    'http://localhost/album/retrieve/?error=No+image+was+selected+for+upload',
+    'http://localhost/album/list?error=No+image+was+selected+for+upload',
     'No image was selected for upload'
 );
 

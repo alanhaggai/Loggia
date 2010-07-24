@@ -42,16 +42,4 @@ $ua->submit_form(
 );
 $ua->content_contains(q{Album creation failed});
 
-# check if album exists
-$ua->get_ok('http://localhost/album/list');
-$ua->content_contains('Paris');
-$ua->content_contains('Paris by night');
-
-# delete album
-$ua->submit_form('form_number' => 1);
-
-# album should not exist as it has already been deleted
-$ua->get_ok('http://localhost/album/list');
-$ua->content_contains('No albums present');
-
 done_testing();
