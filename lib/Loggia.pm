@@ -36,6 +36,10 @@ __PACKAGE__->config(
     name => 'Loggia',
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
+    'static' => {
+        'dirs'  => ['static' => qr{^images/gallery/$}],
+        'debug' => 1,
+    },
 );
 
 # Start the application

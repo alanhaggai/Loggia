@@ -1,15 +1,47 @@
 [% META title = 'Retrieve Album' %]
 
-[% IF images;
-    FOR image IN images %]
-        <form method='post' action='[% c.uri_for("delete") %]'>
-            <div class='image'>
-                <div class='image-description'>[% image.description %]</div>
+[% IF album %]
+    <form
+      method='post'
+      action='[% c.uri_for("/image/upload") %]'
+      enctype='multipart/form-data'>
+        <div class='image-file'>
+            <div>
+                <label>
+                    File:
+                    <input name='file' type='file' />
+                </label>
             </div>
 
-            <input name='id' type='hidden' value='[% album.id %]' />
-        </form>
-    [% END;
-END %]
+            <div>
+                <label>
+                    Description:
+                    <input name='description' type='text' />
+                </label>
+            </div>
 
-<input name='submit' type='submit' value='Delete Album' />
+            <input name='album' type='hidden' value='[% album.id %]' />
+
+            <div>
+                <input name='submit' type='submit' value='Upload Image' />
+            </div>
+        </div>
+    </form>
+
+    [% IF images;
+        FOR image IN images %]
+            <form method='post' action='[% c.uri_for("delete") %]'>
+                <div class='image'>
+                    <div class='image'>
+                        <img src='/static/images/gallery/[% image.hash %]' alt='[% image.description %]' />
+                    </div>
+                    <div class='image-description'>[% image.description %]</div>
+                </div>
+
+                <input name='image' type='hidden' value='[% album.id %]' />
+            </form>
+        [% END;
+    END %]
+
+    <input name='submit' type='submit' value='Delete Album' />
+[% END %]

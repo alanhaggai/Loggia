@@ -122,7 +122,10 @@ sub retrieve :Local :Args(1) {
         my $album  = $c->model('DB::Album')->find($id);
         if ($album) {
             my @images = $album->images();
-            $c->stash('images' => \@images);
+            $c->stash(
+                'images' => \@images,
+                'album'  => $album,
+            );
         }
         else {
             $c->stash('status' => 'Album does not exist');
