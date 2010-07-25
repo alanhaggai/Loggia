@@ -10,6 +10,7 @@ plan skip_all => 'set TEST_POD to enable this test' unless $ENV{TEST_POD};
 my @skip_modules = qw{
     Loggia::Schema
     Loggia::Schema::Result::Album
+    Loggia::Schema::Result::Image
 };
 
 for my $module (all_modules('.')) {
