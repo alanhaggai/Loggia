@@ -22,14 +22,14 @@ Displays albums.
 
 =head2 index
 
-The root page (/)
+Forward control to /album/list to list existing albums.
 
 =cut
 
 sub index :Path :Args(0) {
     my ( $self, $c ) = @_;
 
-    $c->stash('template' => 'index.tt');
+    $c->detach('/album/list');
 }
 
 =head2 default
