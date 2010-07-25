@@ -44,6 +44,22 @@ sub default :Path {
     $c->response->status(404);
 }
 
+=head2 display_login
+
+Display login page if user has not logged in yet.
+
+=cut
+
+sub display_login :Private {
+    my ($self, $c) = @_;
+
+    if (!$c->user_exists()) {
+        $c->res->redirect(
+            $c->uri_for('/admin/login')
+        );
+    }
+}
+
 =head2 end
 
 Attempt to render a view, if needed.
