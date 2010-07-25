@@ -4,9 +4,15 @@
     FOR album IN albums %]
         <form method='post' action='[% c.uri_for("delete") %]'>
             <div class='album'>
-                <div class='album-name'>
-                    <a href='/album/retrieve/[% album.id %]'>[% album.name %]</a>
-                </div>
+                <a href='/album/retrieve/[% album.id %]'>
+                    [%
+                        USE Math;
+
+                        random_image = Math.rand(album.images.size);
+                    %]
+                    <img src='/static/images/gallery/thumbnails/[% album.images.${random_image}.hash %]' alt='[% album.name %]' />
+                </a>
+                <div class='album-name'>[% album.name %]</div>
                 <div class='album-description'>[% album.description %]</div>
             </div>
 
