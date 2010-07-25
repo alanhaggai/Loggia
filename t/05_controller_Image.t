@@ -1,10 +1,14 @@
+#!/usr/bin/env perl
+
 use strict;
 use warnings;
 use Test::More;
 
-BEGIN { use_ok 'Catalyst::Test', 'Loggia' }
-BEGIN { use_ok 'Loggia::Controller::Image' }
-BEGIN { use_ok 'Test::WWW::Mechanize::Catalyst' => 'Loggia' }
+BEGIN {
+    use_ok('Catalyst::Test', 'Loggia');
+    use_ok('Loggia::Controller::Image');
+    use_ok('Test::WWW::Mechanize::Catalyst' => 'Loggia');
+}
 
 # image upload without an image
 my $response = request('/image/upload');
