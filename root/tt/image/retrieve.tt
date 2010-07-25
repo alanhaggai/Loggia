@@ -1,6 +1,8 @@
 [% META title = 'Retrieve Image' %]
 
 [% IF !error && !c.req.param('error') %]
+    <strong class='image-description'>[% image.description %]</strong>
+
     <img src='/static/images/gallery/[% image.hash %]' alt='[% image.description %]' />
     <div class='image-description>
         [% image.description %]
