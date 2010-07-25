@@ -15,6 +15,12 @@ use Catalyst::Runtime 5.80;
 use Catalyst qw/
     ConfigLoader
     Static::Simple
+
+    Authentication
+    Authorization::Roles
+    Session
+    Session::State::Cookie
+    Session::Store::FastMmap
 /;
 
 extends 'Catalyst';
@@ -38,6 +44,21 @@ __PACKAGE__->config(
     'static' => {
         'dirs'  => ['static' => qr{^images/gallery/$}],
         'debug' => 1,
+    },
+    'Plugin::Authentication' => {
+        'default' => {
+            'credential' => {
+                'class'         => 'Password',
+                'password_type' => 'crypted',
+            },
+            'store' => {
+                'class'                     => 'DBIx::Class',
+                'user_model'                => 'Loggia::User',
+                'role_relation'             => 'role',
+                'role_field'                => 'role',
+                'use_userdata_from_session' => 1,
+            },
+        },
     },
 );
 

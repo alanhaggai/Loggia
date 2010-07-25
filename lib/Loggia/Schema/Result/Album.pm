@@ -29,8 +29,8 @@ __PACKAGE__->set_primary_key("id");
 __PACKAGE__->add_unique_constraint("name", ["name"]);
 
 
-# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-07-08 07:22:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cFbTpdYsbqR8X1lbUSJaWA
+# Created by DBIx::Class::Schema::Loader v0.04006 @ 2010-07-25 12:54:06
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:j8e02KYAnt6rjQKx5ZEjTQ
 
 __PACKAGE__->has_many(
     'images' => 'Loggia::Schema::Result::Image',

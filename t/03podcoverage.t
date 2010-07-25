@@ -11,6 +11,9 @@ my @skip_modules = qw{
     Loggia::Schema
     Loggia::Schema::Result::Album
     Loggia::Schema::Result::Image
+    Loggia::Schema::Result::User
+    Loggia::Schema::Result::Role
+    Loggia::Schema::Result::UserToRole
 };
 
 for my $module (all_modules('.')) {

@@ -17,6 +17,12 @@ requires 'Config::General'; # This should reflect the config file format you've 
 
 requires 'Try::Tiny';
 requires 'Image::Magick';
+requires 'Catalyst::Plugin::Authentication';
+requires 'Catalyst::Authentication::Store::DBIx::Class';
+requires 'Catalyst::Plugin::Authorization::Roles';
+requires 'Catalyst::Plugin::Session';
+requires 'Catalyst::Plugin::Session::State::Cookie';
+requires 'Catalyst::Plugin::Session::Store::FastMmap';
 
 test_requires 'Test::More' => '0.88';
 catalyst;
