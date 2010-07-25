@@ -5,12 +5,18 @@
         <form method='post' action='[% c.uri_for("delete") %]'>
             <div class='album'>
                 <a href='/album/retrieve/[% album.id %]'>
-                    [%
-                        USE Math;
+                    [% USE Math;
 
-                        random_image = Math.rand(album.images.size);
-                    %]
-                    <img src='/static/images/gallery/thumbnails/[% album.images.${random_image}.hash %]' alt='[% album.name %]' />
+                    random_image = Math.rand(album.images.size);
+                    IF album.images.size %]
+                        <img
+                          src='/static/images/gallery/thumbnails/[% album.images.${random_image}.hash %]'
+                          alt='[% album.name %]' />
+                    [% ELSE %]
+                        <img
+                          src='/static/images/album.png'
+                          alt='[% album.name %]' />
+                    [% END %]
                 </a>
                 <div class='album-name'>[% album.name %]</div>
                 <div class='album-description'>[% album.description %]</div>
