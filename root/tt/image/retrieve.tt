@@ -2,4 +2,7 @@
 
 [% IF !error && !c.req.param('error') %]
     <img src='/static/images/gallery/[% image.hash %]' alt='[% image.description %]' />
+    <div class='image-description>
+        [% image.description %]
+    </div>
 [% END %]
