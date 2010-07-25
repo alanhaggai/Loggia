@@ -30,6 +30,8 @@ to which the image has been uploaded.
 sub upload :Local {
     my ( $self, $c ) = @_;
 
+    $c->forward('/display_login');
+
     my %query_parametres;
     my $file        = $c->req->upload('file');
     my $description = $c->req->body_params->{'description'};
@@ -113,6 +115,8 @@ Delete image from album.
 
 sub delete :Local {
     my ($self, $c) = @_;
+
+    $c->forward('/display_login');
 
     my $image_id = $c->req->body_params->{'image'};
     my $album_id = $c->req->body_params->{'album'};
