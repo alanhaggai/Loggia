@@ -1,5 +1,8 @@
 [% META title = 'Retrieve Album' %]
 
+<h2 class='album-name'>[% album.name %]</div>
+<strong class='album-description'>[% album.description %]</strong>
+
 [% IF album %]
     <form
       method='post'
