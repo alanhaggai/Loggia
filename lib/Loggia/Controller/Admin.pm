@@ -56,6 +56,19 @@ sub login_do :Path('login.do') {
     );
 }
 
+=head2 logout
+
+Log user out.
+
+=cut
+
+sub logout :Local {
+    my ($self, $c) = @_;
+
+    $c->logout();
+    $c->res->redirect('/');
+}
+
 =head1 AUTHOR
 
 Alan Haggai Alavi
