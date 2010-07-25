@@ -15,6 +15,22 @@ Controller for album CRUD.
 
 =head1 METHODS
 
+=head2 display_login
+
+Display login page if user has not logged in yet.
+
+=cut
+
+sub display_login :Private {
+    my ($self, $c) = @_;
+
+    if (!$c->user_exists()) {
+        $c->res->redirect(
+            $c->uri_for('/admin/login')
+        );
+    }
+}
+
 =head2 create
 
 Render template for creating album.
@@ -24,14 +40,8 @@ Render template for creating album.
 sub create :Local {
     my ($self, $c) = @_;
 
-    if ($c->user_exists()) {
-        $c->stash('template' => 'album/create.tt');
-    }
-    else {
-        $c->res->redirect(
-            $c->uri_for('/admin/login')
-        );
-    }
+    $c->forward('display_login');
+    $c->stash('template' => 'album/create.tt');
 }
 
 =head2 create_do
@@ -43,6 +53,7 @@ Do the actual album creation.
 sub create_do :Path('create.do') {
     my ($self, $c) = @_;
 
+    $c->forward('display_login');
     my $name        = $c->req->body_params->{'name'};
     my $description = $c->req->body_params->{'description'};
 
@@ -104,6 +115,7 @@ Delete album.
 sub delete :Local {
     my ($self, $c) = @_;
 
+    $c->forward('display_login');
     my $id = $c->req->body_params->{'id'};
     my %query_parametres;
     try {
