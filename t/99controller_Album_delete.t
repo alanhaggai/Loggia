@@ -10,8 +10,8 @@ my $ua = Test::WWW::Mechanize::Catalyst->new();
 
 # check if album exists
 $ua->get_ok('http://localhost/album/list');
-$ua->content_contains('Paris');
-$ua->content_contains('Paris by night');
+$ua->content_contains('Portugal');
+$ua->content_contains('YAPC::EU::2009');
 
 # delete album
 $ua->submit_form('form_number' => 1);

@@ -20,8 +20,8 @@ $ua->content_contains(q{name='description'});
 $ua->content_contains(q{name='submit'});
 
 # post a name and description
-my $name        = 'Paris';
-my $description = 'Paris by night';
+my $name        = 'Portugal';
+my $description = 'YAPC::EU::2009';
 
 # create an album
 $ua->submit_form(
