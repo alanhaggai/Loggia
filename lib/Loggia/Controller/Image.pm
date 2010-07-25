@@ -93,6 +93,32 @@ sub retrieve :Local :Args(1) {
     }
 }
 
+=head2 delete
+
+Delete image from album.
+
+=cut
+
+sub delete :Local {
+    my ($self, $c) = @_;
+
+    my $image_id = $c->req->body_params->{'image'};
+    my $album_id = $c->req->body_params->{'album'};
+
+    my $image = $c->model('DB::Image')->find($image_id);
+    my %query_parametres;
+    if ($image->delete()) {
+        $query_parametres{'status'} = 'Image deleted successfully';
+    }
+    else {
+        $query_parametres{'error'} = 'Image deletion failed';
+    }
+
+    $c->res->redirect(
+        $c->uri_for("/album/retrieve/$album_id", \%query_parametres)
+    );
+}
+
 =head1 AUTHOR
 
 Alan Haggai Alavi

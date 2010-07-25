@@ -30,7 +30,7 @@
 
     [% IF images;
         FOR image IN images %]
-            <form method='post' action='[% c.uri_for("delete") %]'>
+            <form method='post' action='[% c.uri_for("/image/delete") %]'>
                 <div class='image'>
                     <div class='image'>
                         <img src='/static/images/gallery/[% image.hash %]' alt='[% image.description %]' />
@@ -38,10 +38,13 @@
                     <div class='image-description'>[% image.description %]</div>
                 </div>
 
-                <input name='image' type='hidden' value='[% album.id %]' />
+                <input name='image' type='hidden' value='[% image.id %]' />
+                <input name='album' type='hidden' value='[% album.id %]' />
+
+                <div>
+                    <input name='submit' type='submit' value='Delete Image' />
+                </div>
             </form>
         [% END;
     END %]
-
-    <input name='submit' type='submit' value='Delete Album' />
 [% END %]
