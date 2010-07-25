@@ -39,20 +39,29 @@ sub create_do :Path('create.do') {
     my $name        = $c->req->body_params->{'name'};
     my $description = $c->req->body_params->{'description'};
 
+    my %query_parametres;
     try {
         my $album = $c->model('DB::Album')->create({
             'name'        => $name,
             'description' => $description,
         });
         if ($album) {
-            $c->stash('status' => 'Album created successfully');
+            my $album_id = $album->id();
+            $query_parametres{'status'} = 'Album created successfully';
+            $c->res->redirect(
+                $c->uri_for("/album/retrieve/$album_id", \%query_parametres)
+            );
+
+            return;
         }
     }
     catch {
-        $c->stash('error' => 'Album creation failed');
+        $query_parametres{'error'} = 'Album creation failed';
     };
 
-    $c->stash('template' => 'album/create-do.tt');
+    $c->res->redirect(
+        $c->uri_for("/album/list", \%query_parametres)
+    );
 }
 
 =head2 list
