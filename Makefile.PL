@@ -23,6 +23,7 @@ requires 'Catalyst::Plugin::Authorization::Roles';
 requires 'Catalyst::Plugin::Session';
 requires 'Catalyst::Plugin::Session::State::Cookie';
 requires 'Catalyst::Plugin::Session::Store::FastMmap';
+requires 'Digest::SHA1';
 
 test_requires 'Test::More' => '0.88';
 catalyst;
