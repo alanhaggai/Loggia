@@ -6,6 +6,7 @@ BEGIN {extends 'Catalyst::Controller'; }
 
 use Digest::SHA1 'sha1_hex';
 use File::Spec::Functions 'catfile';
+use Image::Magick;
 
 =head1 NAME
 
@@ -38,10 +39,21 @@ sub upload :Local {
         my $fh                 = $file->fh();
         my $binary_data        = do { local $/; <$fh> };
         my $hash               = sha1_hex($binary_data);
-        my $file_name_in_store = catfile('root/static/images/gallery/', $hash);
+        my $file_name_in_store = catfile('root/static/images/gallery', $hash);
 
         if ($file->copy_to($file_name_in_store)) {
             $query_parametres{'status'} = 'Image uploaded successfully';
+
+            # generate thumbnail
+            my $magick = Image::Magick->new();
+            $magick->Read($file_name_in_store);
+            $magick->Thumbnail(
+                'width' =>  '150',
+                'height' => '150',
+            );
+            $magick->Write(
+                catfile('root/static/images/gallery/thumbnails', $hash),
+            );
 
             my $image = $c->model('DB::Image');
             $image->create({
