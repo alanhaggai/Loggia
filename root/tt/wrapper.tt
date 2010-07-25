@@ -11,6 +11,12 @@
         <div id='container'> 
             <div id='header'>
                 <h1>Loggia</h1>
+
+                [% IF c.user %]
+                    <a href='/admin/logout'>Logout [% c.user.username %]</a>
+                [% ELSE %]
+                    <a href='/admin/login'>Login</a>
+                [% END %]
             </div>
 
             <div id='showcase'>

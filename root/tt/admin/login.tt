@@ -1,0 +1,25 @@
+[% META title = 'Login' %]
+
+[% IF c.user %]
+    <p>You are already logged in as [% c.user.username %].</p>
+[% ELSE %]
+    <form method='post' action='[% c.uri_for("/admin/login.do") %]'>
+        <div>
+            <label>
+                Username:
+                <input name='username' type='text' />
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Password:
+                <input name='password' type='text' />
+            </label>
+        </div>
+
+        <div>
+            <input name='submit' type='submit' value='Login' />
+        </div>
+    </form>
+[% END %]

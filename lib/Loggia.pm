@@ -48,12 +48,13 @@ __PACKAGE__->config(
     'Plugin::Authentication' => {
         'default' => {
             'credential' => {
-                'class'         => 'Password',
-                'password_type' => 'crypted',
+                'class'              => 'Password',
+                'password_type'      => 'hashed',
+                'password_hash_type' => 'SHA-1',
             },
             'store' => {
                 'class'                     => 'DBIx::Class',
-                'user_model'                => 'Loggia::User',
+                'user_model'                => 'DB::User',
                 'role_relation'             => 'role',
                 'role_field'                => 'role',
                 'use_userdata_from_session' => 1,
