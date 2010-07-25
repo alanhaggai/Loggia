@@ -46,6 +46,4 @@ $ua->submit_form(
 );
 $ua->content_contains(q{Album creation failed});
 
-ok(request('/album/list')->is_success(), 'Request should succeed');
-
 done_testing();

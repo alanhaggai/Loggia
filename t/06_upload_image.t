@@ -30,9 +30,6 @@ $ua->submit_form(
     }
 );
 
-
-# check if image exists
-$ua->get_ok('/image/retrieve/1');
-$ua->content_lacks('Image not found');
+$ua->content_contains('Image uploaded successfully');
 
 done_testing();
