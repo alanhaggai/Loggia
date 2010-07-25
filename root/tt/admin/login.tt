@@ -1,7 +1,7 @@
 [% META title = 'Login' %]
 
 [% IF c.user %]
-    <p>You are already logged in as [% c.user.username %].</p>
+    <p>You are already logged in as <strong>[% c.user.username %]</strong>.</p>
 [% ELSE %]
     <form method='post' action='[% c.uri_for("/admin/login.do") %]'>
         <div>
