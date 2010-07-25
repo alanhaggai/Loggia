@@ -36,7 +36,9 @@
             <form method='post' action='[% c.uri_for("/image/delete") %]'>
                 <div class='image'>
                     <div class='image'>
-                        <img src='/static/images/gallery/thumbnails/[% image.hash %]' alt='[% image.description %]' />
+                        <a href='/image/retrieve/[% image.id %]'>
+                            <img src='/static/images/gallery/thumbnails/[% image.hash %]' alt='[% image.description %]' />
+                        </a>
                     </div>
                     <div class='image-description'>[% image.description %]</div>
                 </div>
