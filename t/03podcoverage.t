@@ -14,6 +14,8 @@ my @skip_modules = qw{
     Loggia::Schema::Result::User
     Loggia::Schema::Result::Role
     Loggia::Schema::Result::UserToRole
+
+    t::Login
 };
 
 for my $module (all_modules('.')) {

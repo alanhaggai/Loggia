@@ -24,7 +24,14 @@ Render template for creating album.
 sub create :Local {
     my ($self, $c) = @_;
 
-    $c->stash('template' => 'album/create.tt');
+    if ($c->user_exists()) {
+        $c->stash('template' => 'album/create.tt');
+    }
+    else {
+        $c->res->redirect(
+            $c->uri_for('/admin/login')
+        );
+    }
 }
 
 =head2 create_do

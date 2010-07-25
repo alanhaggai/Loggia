@@ -12,7 +12,7 @@
             <div id='header'>
                 <h1>Loggia</h1>
 
-                [% IF c.user %]
+                [% IF c.user_exists %]
                     <a href='/admin/logout'>Logout [% c.user.username %]</a>
                 [% ELSE %]
                     <a href='/admin/login'>Login</a>

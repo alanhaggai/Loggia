@@ -1,6 +1,11 @@
+package Login;
+
 use strict;
 use warnings;
 use Test::More;
+
+use base 'Exporter';
+our @EXPORT = qw(login);
 
 # skip test if LOGGIA_USERNAME and LOGGIA_PASSWORD are not set
 my ($username, $password);
@@ -19,20 +24,24 @@ BEGIN { use_ok 'Catalyst::Test', 'Loggia' }
 BEGIN { use_ok 'Loggia::Controller::Admin' }
 BEGIN { use_ok 'Test::WWW::Mechanize::Catalyst' => 'Loggia' }
 
-my $ua = Test::WWW::Mechanize::Catalyst->new();
-$ua->get_ok('/admin/login');
-ok($username, 'LOGGIA_USERNAME');
-ok($password, 'LOGGIA_PASSWORD');
+sub login {
+    my $ua = Test::WWW::Mechanize::Catalyst->new();
+    $ua->get_ok('/admin/login');
+    ok($username, 'LOGGIA_USERNAME');
+    ok($password, 'LOGGIA_PASSWORD');
 
-$ua->submit_form(
-    'fields' => {
-        'username' => $username,
-        'password' => $password,
-    }
-);
+    $ua->submit_form(
+        'fields' => {
+            'username' => $username,
+            'password' => $password,
+        }
+    );
 
-# check if login succeeded
-$ua->get_ok('/admin/login');
-$ua->content_contains("You are already logged in as <strong>$username</strong>.");
+    # check if login succeeded
+    $ua->get_ok('/admin/login');
+    $ua->content_contains("You are already logged in as <strong>$username</strong>.");
 
-done_testing();
+    return $ua;
+}
+
+1;

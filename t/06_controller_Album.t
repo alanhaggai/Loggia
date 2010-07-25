@@ -2,16 +2,18 @@ use strict;
 use warnings;
 use Test::More;
 
-BEGIN { use_ok 'Catalyst::Test', 'Loggia'  }
-BEGIN { use_ok 'Loggia::Controller::Album' }
-BEGIN { use_ok 'Test::WWW::Mechanize::Catalyst' => 'Loggia' }
+my $ua;
+BEGIN {
+    use_ok('Catalyst::Test', 'Loggia');
+    use_ok('Loggia::Controller::Album');
+    use_ok('Test::WWW::Mechanize::Catalyst' => 'Loggia');
 
-ok(request('/album/create')->is_success, 'Request should succeed');
-ok(request('/album/list')->is_success,   'Request should succeed');
+    use lib 't';
+    use_ok('Login');
+}
 
-my $ua = Test::WWW::Mechanize::Catalyst->new();
-
-$ua->get_ok('http://localhost/album/create');
+$ua = login();
+$ua->get_ok('/album/create');
 $ua->title_is('Loggia - Create Album');
 
 # check if page contains controls for name, description and submit
@@ -33,7 +35,7 @@ $ua->submit_form(
 $ua->content_contains(q{Album created successfully});
 
 # duplicate albums should not be created
-$ua->get_ok('http://localhost/album/create');
+$ua->get_ok('/album/create');
 $ua->submit_form(
     'fields' => {
         'name'        => $name,
@@ -41,5 +43,7 @@ $ua->submit_form(
     }
 );
 $ua->content_contains(q{Album creation failed});
+
+ok(request('/album/list')->is_success(), 'Request should succeed');
 
 done_testing();
