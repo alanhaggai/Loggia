@@ -1,6 +1,6 @@
 [% META title = 'Retrieve Album' %]
 
-<h2 class='album-name'>[% album.name %]</div>
+<h2 class='album-name'>[% album.name %]</h2>
 <strong class='album-description'>[% album.description %]</strong>
 
 [% IF album %]
