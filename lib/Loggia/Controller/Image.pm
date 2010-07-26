@@ -46,13 +46,14 @@ sub upload :Local {
         if ($file->copy_to($file_name_in_store)) {
             $query_parametres{'status'} = 'Image uploaded successfully';
 
-            # generate thumbnail
+            # resize image and generate thumbnail
             my $magick = Image::Magick->new();
             $magick->Read($file_name_in_store);
-            $magick->Thumbnail(
-                'width' =>  '150',
-                'height' => '150',
-            );
+
+            $magick->Resize('geometry' => '800x600');
+            $magick->Write($file_name_in_store);
+
+            $magick->Thumbnail('geometry' => '150x150');
             $magick->Write(
                 catfile('root/static/images/gallery/thumbnails', $hash),
             );
