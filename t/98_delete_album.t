@@ -8,9 +8,12 @@ BEGIN {
     use_ok('Catalyst::Test', 'Loggia');
     use_ok('Loggia::Controller::Album');
     use_ok('Test::WWW::Mechanize::Catalyst' => 'Loggia');
+
+    use lib 't';
+    use_ok('Login');
 }
 
-my $ua = Test::WWW::Mechanize::Catalyst->new();
+my $ua = login();
 
 # check if album exists
 $ua->get_ok('http://localhost/album/list');

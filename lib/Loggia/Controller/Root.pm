@@ -57,6 +57,7 @@ sub display_login :Private {
         $c->res->redirect(
             $c->uri_for('/admin/login')
         );
+        $c->detach();
     }
 }
 
