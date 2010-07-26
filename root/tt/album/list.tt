@@ -7,8 +7,8 @@
                 <a href='/album/retrieve/[% album.id %]'>
                     [% USE Math;
 
-                    random_image = Math.rand(album.images.size);
-                    IF album.images.size %]
+                    IF album.images.size != '' AND album.images.size > 1;
+                        random_image = Math.rand(album.images.size) %]
                         <img
                           src='/static/images/gallery/thumbnails/[% album.images.${random_image}.hash %]'
                           alt='[% album.name %]' />
