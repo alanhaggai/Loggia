@@ -3,37 +3,57 @@
 <h2 class='album-name'>[% album.name %]</h2>
 <strong class='album-description'>[% album.description %]</strong>
 
-[% IF album %]
-    <form
-      method='post'
-      action='[% c.uri_for("/image/upload") %]'
-      enctype='multipart/form-data'>
-        <div class='image-file'>
-            <div>
-                <label>
-                    File:
-                    <input name='file' type='file' />
-                </label>
-            </div>
+[% IF album;
+    IF c.user_exists %]
+        <form
+          method='post'
+          action='[% c.uri_for("/image/upload") %]'
+          enctype='multipart/form-data'>
+            <div class='image-file'>
+                <div>
+                    <label>
+                        File:
+                        <input name='file' type='file' />
+                    </label>
+                </div>
 
-            <div>
-                <label>
-                    Description:
-                    <input name='description' type='text' />
-                </label>
-            </div>
+                <div>
+                    <label>
+                        Description:
+                        <input name='description' type='text' />
+                    </label>
+                </div>
 
-            <input name='album' type='hidden' value='[% album.id %]' />
+                <input name='album' type='hidden' value='[% album.id %]' />
 
-            <div>
-                <input name='submit' type='submit' value='Upload Image' />
+                <div>
+                    <input name='submit' type='submit' value='Upload Image' />
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    [% END %]
 
     [% IF images;
-        FOR image IN images %]
-            <form method='post' action='[% c.uri_for("/image/delete") %]'>
+        FOR image IN images;
+            IF c.user_exists %]
+                <form method='post' action='[% c.uri_for("/image/delete") %]'>
+                    <div class='image'>
+                        <div class='image'>
+                            <a href='/image/retrieve/[% image.id %]'>
+                                <img src='/static/images/gallery/thumbnails/[% image.hash %]' alt='[% image.description %]' />
+                            </a>
+                        </div>
+                        <div class='image-description'>[% image.description %]</div>
+                    </div>
+
+                    <input name='image' type='hidden' value='[% image.id %]' />
+                    <input name='album' type='hidden' value='[% album.id %]' />
+
+                    <div>
+                        <input name='submit' type='submit' value='Delete Image' />
+                    </div>
+                </form>
+            [% ELSE %]
                 <div class='image'>
                     <div class='image'>
                         <a href='/image/retrieve/[% image.id %]'>
@@ -42,14 +62,7 @@
                     </div>
                     <div class='image-description'>[% image.description %]</div>
                 </div>
-
-                <input name='image' type='hidden' value='[% image.id %]' />
-                <input name='album' type='hidden' value='[% album.id %]' />
-
-                <div>
-                    <input name='submit' type='submit' value='Delete Image' />
-                </div>
-            </form>
-        [% END;
+            [% END;
+        END;
     END %]
 [% END %]

@@ -1,8 +1,32 @@
 [% META title = 'List Albums' %]
 
 [% IF albums;
-    FOR album IN albums %]
-        <form method='post' action='[% c.uri_for("delete") %]'>
+    FOR album IN albums;
+        IF c.user_exists %]
+            <form method='post' action='[% c.uri_for("delete") %]'>
+                <div class='album'>
+                    <a href='/album/retrieve/[% album.id %]'>
+                        [% USE Math;
+
+                        IF album.images.size != '' AND album.images.size > 1;
+                            random_image = Math.rand(album.images.size) %]
+                            <img
+                              src='/static/images/gallery/thumbnails/[% album.images.${random_image}.hash %]'
+                              alt='[% album.name %]' />
+                        [% ELSE %]
+                            <img
+                              src='/static/images/album.png'
+                              alt='[% album.name %]' />
+                        [% END %]
+                    </a>
+                    <div class='album-name'>[% album.name %]</div>
+                    <div class='album-description'>[% album.description %]</div>
+                </div>
+
+                <input name='id' type='hidden' value='[% album.id %]' />
+                <input name='submit' type='submit' value='Delete Album' />
+            </form>
+        [% ELSE %]
             <div class='album'>
                 <a href='/album/retrieve/[% album.id %]'>
                     [% USE Math;
@@ -21,9 +45,6 @@
                 <div class='album-name'>[% album.name %]</div>
                 <div class='album-description'>[% album.description %]</div>
             </div>
-
-            <input name='id' type='hidden' value='[% album.id %]' />
-            <input name='submit' type='submit' value='Delete Album' />
-        </form>
-    [% END;
+        [% END;
+    END;
 END %]
